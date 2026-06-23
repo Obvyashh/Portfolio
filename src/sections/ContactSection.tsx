@@ -82,39 +82,8 @@ export default function ContactSection() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setLoading(true);
-    setSuccess("");
-    setError("");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data: { error?: string } = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Unable to send message.");
-      }
-
-      setSuccess("Transmission successful. I’ll get back to you shortly.");
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
+  const handleSubmit = () => {
+    window.location.href = "mailto:yadh6699@gmail.com?subject=Portfolio Contact&body=Hello Yash,";
   };
 
   return (
@@ -310,3 +279,4 @@ export default function ContactSection() {
     </motion.section>
   );
 }
+
